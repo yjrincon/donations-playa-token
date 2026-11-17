@@ -328,7 +328,9 @@ const T = {
   }
 };
 
-let lang = (localStorage.getItem("playa-lang") || (navigator.language||"es").slice(0,2)) === "en" ? "en" : "es";
+let saved = null; try{ saved = localStorage.getItem("playa-lang"); }catch(e){}
+const q = /[?&]lang=(en|es)\b/.exec(location.search);
+let lang = (q ? q[1] : (saved || (navigator.language||"es").slice(0,2))) === "en" ? "en" : "es";
 const $ = id => document.getElementById(id);
 const valid = /^0x[a-fA-F0-9]{40}$/.test(DONATION_ADDRESS);
 
